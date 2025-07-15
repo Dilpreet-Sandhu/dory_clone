@@ -6,7 +6,7 @@ import { Card, CardHeader } from './ui/card'
 import { cn, propsWithClassName } from '@/lib/utils/uiUtils'
 import { EventDetail } from '@/lib/prisma/validators/event-validator'
 import { User } from 'lucide-react'
-import routes from '@/app/config/routes'
+import routes from '@/config/routes'
 
 type Props = propsWithClassName<{
     event : EventDetail

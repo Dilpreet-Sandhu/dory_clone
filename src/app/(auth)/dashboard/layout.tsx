@@ -1,4 +1,4 @@
-import routes from "@/app/config/routes";
+import routes from "@/config/routes";
 import { DesktopDashboardSideBar, MobileDashboardSidebar } from "@/components/layout/DashboardSidebar";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { redirect } from "next/navigation";

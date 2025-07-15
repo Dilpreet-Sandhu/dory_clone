@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react';
 import { buttonVariants } from '../ui/button';
 import { RegisterLink, useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
-import routes from '@/app/config/routes';
+import routes from '@/config/routes';
 
 const btnClasses = cn(buttonVariants(),"p-6 text-sm rounded-sm lg:p-8 lg:text-xl")
 

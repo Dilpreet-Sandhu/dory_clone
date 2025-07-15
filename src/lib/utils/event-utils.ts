@@ -1,4 +1,4 @@
-import routes, { baseUrl } from "@/app/config/routes"
+import routes, { baseUrl } from "@/config/routes"
 import { Event } from "@/generated/prisma"
 
 type Props = {

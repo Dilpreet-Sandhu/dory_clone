@@ -1,4 +1,4 @@
-import routes from "@/app/config/routes";
+import routes from "@/config/routes";
 import { getUser } from "@/lib/server/getUser";
 import { onlyDateFormatter } from "@/lib/utils/date-utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";

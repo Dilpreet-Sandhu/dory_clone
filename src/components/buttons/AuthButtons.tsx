@@ -3,7 +3,7 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import React from 'react'
 import {Bell} from 'lucide-react';
 import Link from 'next/link';
-import routes from '@/app/config/routes';
+import routes from '@/config/routes';
 import UserAvatar from '../UserAvatar';
 import { cn, propsWithClassName } from '@/lib/utils/uiUtils';
 import PublicAuthButtons from './PublicAuthButtons';

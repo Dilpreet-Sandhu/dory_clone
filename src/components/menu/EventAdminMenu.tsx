@@ -7,6 +7,7 @@ import { Edit, Settings, Trash } from "lucide-react"
 import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs"
 import { useState } from "react"
 import DeleteEventDialog from "../dialogs/DeleteEventDialog"
+import { useIsParticipantView } from "@/hooks/useIsparticipantView"
 
 
 type Props = propsWithClassName<{
@@ -21,7 +22,7 @@ const EventAdminMenu = ({event,className} : Props) => {
     const {user} = useKindeBrowserClient();
 
     const isAdmin = user?.id === event.ownerId;
-    const isParticipantView = false;
+    const isParticipantView = useIsParticipantView();
 
     if (!isAdmin  || isParticipantView) return null;
 

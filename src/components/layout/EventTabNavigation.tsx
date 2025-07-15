@@ -1,9 +1,10 @@
 'use client'
 
 import { cn, propsWithClassName } from "@/lib/utils/uiUtils"
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
-import routes from "@/app/config/routes";
+import routes from "@/config/routes";
+import Link from "next/link";
 
 type Props = propsWithClassName<{
     ownerId : string;
@@ -25,12 +26,13 @@ const EventTabNavigation = ({ownerId,eventSlug,className} : Props) => {
             ["Q&A","Polls"].map((tab) => (
                 <Button
                  key={tab}
-                  variant="outline" 
-                  className={cn("basis-1/2 bg-gray-100 rounded-t-lg rounded-b-none",
-                  {"bg-white" : tab == 'Q&A' ? isQATab : isPollsTab})}
+                  className={cn("basis-1/2 bg-gray-100 text-black  rounded-t-lg rounded-b-none",
+                  {"bg-white" : tab == 'Q&A' ? isQATab : isPollsTab},buttonVariants({variant : "outline"}))}
                   onClick={() => {
                     router.replace(
-                        tab == 'Q&A' ? routes.event({ownerId,slug : eventSlug}) : routes.eventPolls({ownerId,slug : eventSlug})
+                      tab == 'Q&A' ?
+                      routes.event({ownerId,slug : eventSlug}) : 
+                      routes.eventPolls({ownerId,slug : eventSlug})
                     )
                   }}
                   >
