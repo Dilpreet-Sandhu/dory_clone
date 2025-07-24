@@ -14,9 +14,9 @@ const AuthButtons = async ({className} : propsWithClassName) => {
 
     const user = kindeUser && (await getUser(kindeUser.id));
 
-  
+ 
 
-  return user ? (
+  return user !== null ? (
     <div className={cn("inline-flex gap-x-7 items-center",className)}>
 
       <Bell className="w-5 h-5"/>

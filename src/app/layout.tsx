@@ -27,7 +27,7 @@ export default function RootLayout({
         className={cn("h-full bg-zinc-100",notoSans.className)}
       >
         {children}
-        <Toaster position="top-center" toastOptions={{duration : 1500}}/>
+        <Toaster richColors={true} theme="light" visibleToasts={3}  position="top-center" toastOptions={{duration : 1500}}/>
       </body>
     </html>
   );

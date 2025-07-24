@@ -3,12 +3,17 @@
 import { QuestionDetail } from "@/lib/prisma/validators/question-validator"
 import { cn } from "@/lib/utils/uiUtils"
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import UserAvatar from "./UserAvatar"
 import { defaultDateFormatter } from "@/lib/utils/date-utils"
 import { CheckCircle, EllipsisVertical, Pin } from "lucide-react"
 import QuestionVoteButton from "./buttons/QuestionVoteButton"
-
+import QuestionOptionMenu from "./menu/QuestionOptionMenu"
+import { useTogglePin, useToggleResolve, useUpdateQuestionBody } from "@/hooks/useQuestion"
+import { TextAreaWithCounter } from "./TextAreaWithCounter"
+import {question as questionValidator} from '@/lib/validations/constatnts';
+import { Button } from "./ui/button"
+import { questionBodySchema } from "@/lib/validations/question-schema"
 type Props = {
     question : QuestionDetail
 }
@@ -18,14 +23,49 @@ const Question = ({question} : Props) => {
     const {user} = useKindeBrowserClient();
 
     const [isEditing,setIsEditing] = useState(false);
+    const textRef = useRef<HTMLTextAreaElement>(null);
 
     const {author,createdAt} = question;
     const isAuthor = author.id === user?.id;
     const isAdmin = question.event.ownerId === user?.id;
 
     //todo needs update
-    const {isPinned,isResolved,body} = question;
+    const {isPinned : initalIsPinned,isResolved : initialIsResolved,body : initialBody } = question;
 
+
+    const {isPinned,togglePin} = useTogglePin({
+      questionId : question.id,
+      isPinned : initalIsPinned
+    });
+
+    const {isResolved,toggleResolved} = useToggleResolve({
+      questionId : question.id,
+      isResolved : initialIsResolved
+    });
+
+    const {body,updateBody,isExecuting : isUpdatingBody} = useUpdateQuestionBody({
+      questionId : question.id,
+      body : question.body
+    });
+
+
+    const handleBodyChange = () => {
+
+      const rawBodyVal = textRef.current?.value;
+
+      const parsedBody = questionBodySchema.safeParse(rawBodyVal);
+
+      if (parsedBody.success) {
+
+        const newBody = parsedBody.data;
+
+        setIsEditing(false);
+        console.log("updating body");
+        updateBody(newBody);
+
+      }
+
+    }
 
 
   return (
@@ -73,8 +113,15 @@ const Question = ({question} : Props) => {
 
             {
               !isResolved && (
-                //todo 
-                <EllipsisVertical size={16} className="ml-auto"/>
+               <QuestionOptionMenu
+                  questionId={question.id}
+                  isPinned={isPinned}
+                  isAdmin={isAdmin}
+                  isAuthor={isAuthor}
+                  toggleEditingMode={() => setIsEditing(prev => !prev)}
+                  onPinChange={togglePin }
+                  onResolveChange={toggleResolved}
+                  className={"text-slate-600 ml-auto"} isResolved={isResolved} isEditing={isEditing}               />
               )
 
             }
@@ -91,8 +138,22 @@ const Question = ({question} : Props) => {
 
           {
             isEditing && (
-              <form>
-                {/* todo */}
+              <form onSubmit={(evt) => {
+                evt.preventDefault();
+
+                handleBodyChange();
+              }}>
+                <TextAreaWithCounter
+                  className="mt-3 min-h-24"
+                  defaultValue={body}
+                  maxLength={questionValidator.maxLength}
+                  autoFocus
+                  ref={textRef}
+                />
+                <div>
+                  <Button onClick={() => setIsEditing(false)} variant="ghost">Cancel</Button>
+                  <Button variant={"default"} disabled={isUpdatingBody} className="cursor-pointer" type="submit">Save</Button>
+                </div>
               </form>
             )
           }
