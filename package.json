@@ -11,6 +11,7 @@
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"commonJS\"} prisma/seed.ts"
   },
+  "packageManager": "pnpm@10.13.1",
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@kinde-oss/kinde-auth-nextjs": "^2.8.2",
