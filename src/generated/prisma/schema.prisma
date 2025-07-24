@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id             String             @id @unique
+  email          String             @unique
+  createdAt      DateTime           @default(now())
+  displayName    String             @db.VarChar(255)
+  color          String             @db.VarChar(255)
+  events         Event[]            @relation("owner")
+  participations EventParticipant[]
+  questions      Question[]
+  upvotes        QuestionUpvote[]
+  votes          PollVote[]
+  bookMarks      Event[]
+}
+
+model Event {
+  id           String             @id @default(cuid()) @map("_id")
+  displayName  String             @db.VarChar(100)
+  slug         String?            @db.VarChar(255)
+  createdAt    DateTime           @default(now())
+  owner        User               @relation("owner", fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ownerId      String
+  participants EventParticipant[]
+  questions    Question[]
+  polls        Poll[]
+  bookMarkedBy User[]
+
+  @@unique([slug, ownerId])
+  @@index([slug, ownerId])
+}
+
+model EventParticipant {
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  eventId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
+
+  @@id([eventId, userId])
+}
+
+model Question {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  body       String   @db.VarChar(2500)
+  isPinned   Boolean  @default(false)
+  isResolved Boolean  @default(false)
+
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  eventId String
+
+  author  User             @relation(fields: [userId], references: [id])
+  userId  String
+  upvotes QuestionUpvote[]
+}
+
+model QuestionUpvote {
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  questionId String
+
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId String
+
+  @@id([questionId, authorId])
+}
+
+model Poll {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  body      String   @db.VarChar(500)
+  isLive    Boolean  @default(true)
+
+  event   Event        @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  eventId String
+  options PollOption[]
+
+  votes PollVote[]
+}
+
+model PollOption {
+  id     String     @id @default(cuid())
+  index  Int
+  body   String     @db.VarChar(100)
+  poll   Poll       @relation(fields: [pollId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pollId String
+  votes  PollVote[]
+
+  @@unique([pollId, index])
+  @@index([pollId, index])
+}
+
+model PollVote {
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  authorId String
+
+  pollOption   PollOption @relation(fields: [pollOptionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pollOptionId String
+
+  poll   Poll   @relation(fields: [pollId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pollId String
+
+  @@id([authorId, pollId])
+}
