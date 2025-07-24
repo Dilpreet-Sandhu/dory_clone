@@ -23,7 +23,7 @@ type SearchParams = {
 const EventQuestionsPage = async ({
   params ,
   searchParams
-} : {params : PathParams,searchParams ?: SearchParams}) => {
+} : {params : PathParams,searchParams ?: {[key: string]: string | string[] | undefined}}) => {
 
   const {ownerId,eventSlug} = await params;
   const sortBy = (await searchParams)?.sortBy ?? "newest";
@@ -42,7 +42,7 @@ const EventQuestionsPage = async ({
         <RefreshButton/> 
         <div className="inline-flex items-center p-0.5 lg:gap-x-2">
           <span className="hidden lg:inline-block text-nowrap text-sm text-gray-500">Sort by:</span>
-          <QuestionSortSelectBy sortBy={sortBy}/>
+          <QuestionSortSelectBy sortBy={sortBy as QuestionOrderBy}/>
         </div>
       </div>
 
@@ -60,7 +60,7 @@ const EventQuestionsPage = async ({
 
     {/* List of questions */}
     <Suspense key={Date.now()} fallback={<Loader/>}>
-      <Questions showResolved={showResolved} ownerId={ownerId} eventSlug={eventSlug} questionId={questionId} orderBy={sortBy}/>
+      <Questions showResolved={showResolved} ownerId={ownerId} eventSlug={eventSlug} questionId={questionId as string} orderBy={sortBy as QuestionOrderBy}/>
     </Suspense>
 
     </>

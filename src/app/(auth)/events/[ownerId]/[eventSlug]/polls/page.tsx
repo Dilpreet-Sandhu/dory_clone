@@ -27,7 +27,7 @@ type SearchParams = {
 
 const PollsPage = async ({params,searchParams} : {
   params : PathParams;
-  searchParams ?: SearchParams
+  searchParams ?: {[key: string]: string | string[] | undefined}
 }) => {
 
   const {ownerId,eventSlug} = await params;
@@ -93,7 +93,7 @@ const PollsPage = async ({params,searchParams} : {
         <Polls
           showClosed={showClosed}
           ownerId={ownerId}
-          pollId={pollId}
+          pollId={pollId as string}
           eventSlug={eventSlug}
         />
       </Suspense>
