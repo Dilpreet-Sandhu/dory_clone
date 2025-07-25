@@ -25,10 +25,10 @@ const EventQuestionsPage = async ({
   searchParams
 } : {params : PathParams,searchParams ?: {[key: string]: string | string[] | undefined}}) => {
 
-  const {ownerId,eventSlug} = await params;
-  const sortBy = (await searchParams)?.sortBy ?? "newest";
-  const showResolved = (await searchParams)?.resolved === "true"
-  const questionId = (await searchParams)?.questionId;
+  const {ownerId,eventSlug} =  params;
+  const sortBy = ( searchParams)?.sortBy ?? "newest";
+  const showResolved = (searchParams)?.resolved === "true"
+  const questionId = (searchParams)?.questionId;
 
   const hasFilters = !!questionId;
 

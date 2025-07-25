@@ -30,7 +30,7 @@ const PollsPage = async ({params,searchParams} : {
   searchParams ?: {[key: string]: string | string[] | undefined}
 }) => {
 
-  const {ownerId,eventSlug} = await params;
+  const {ownerId,eventSlug} =  params;
 
 
   const showClosed = searchParams?.closed === "true";
