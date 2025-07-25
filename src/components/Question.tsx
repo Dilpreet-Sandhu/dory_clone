@@ -6,7 +6,7 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
 import { useRef, useState } from "react"
 import UserAvatar from "./UserAvatar"
 import { defaultDateFormatter } from "@/lib/utils/date-utils"
-import { CheckCircle, EllipsisVertical, Pin } from "lucide-react"
+import { CheckCircle ,Pin } from "lucide-react"
 import QuestionVoteButton from "./buttons/QuestionVoteButton"
 import QuestionOptionMenu from "./menu/QuestionOptionMenu"
 import { useTogglePin, useToggleResolve, useUpdateQuestionBody } from "@/hooks/useQuestion"
@@ -30,7 +30,7 @@ const Question = ({question} : Props) => {
     const isAdmin = question.event.ownerId === user?.id;
 
     //todo needs update
-    const {isPinned : initalIsPinned,isResolved : initialIsResolved,body : initialBody } = question;
+    const {isPinned : initalIsPinned,isResolved : initialIsResolved } = question;
 
 
     const {isPinned,togglePin} = useTogglePin({
