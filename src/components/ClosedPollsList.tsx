@@ -22,11 +22,17 @@ const ClosedPollsList = ({
     className
 } : Props) => {
 
-    const [closedPolls,setClosedPolls] = useState(initialPolls);
+    const [closedPolls] = useState(initialPolls);
+
+    function onClick() {
+      console.log(ownerId);
+      console.log(eventSlug);
+      console.log(pollId);
+    }
 
 
   return (
-    <div className={cn("space-y-8 pb-10",className)}>
+    <div onClick={onClick} className={cn("space-y-8 pb-10",className)}>
       {
         closedPolls.length === 0 ? (
             <NoContent>

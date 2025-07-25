@@ -30,6 +30,7 @@ export const OpenQuestionsList = ({
     // todo infinite scrolling
 
     const hasFilters = !!questionId;
+    console.log(orderBy);
 
 
 
@@ -63,7 +64,11 @@ export const ResolvedQuestionsList = ({
     className
 } : Props) => {
 
-     return <div className={cn("space-y-8 pb-10",className)}>
+    const onClick = () => {
+        console.log(ownerId + " " + eventSlug + " " + questionId + " " + orderBy);
+    }
+
+     return <div onClick={onClick} className={cn("space-y-8 pb-10",className)}>
 
         {/* todo create question form */}
 

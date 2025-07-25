@@ -1,5 +1,5 @@
 import { cn, propsWithClassName } from "@/lib/utils/uiUtils";
-import { ComponentProps, ComponentType, PropsWithChildren } from "react"
+import { ComponentType, PropsWithChildren } from "react"
 
 
 type Props = PropsWithChildren<{

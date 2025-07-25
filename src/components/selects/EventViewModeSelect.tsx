@@ -7,11 +7,10 @@ import { eventPageQueryParams } from "@/config/queryparams";
 
 
 
-const viewModes = ["admin","participant"] as const;
 
 const asParticipantParam = eventPageQueryParams.asParticipant; 
 
-type ViewMode = (typeof viewModes)[number];
+type ViewMode = "admin" | "participant";
 
 const EventViewModeSelect = () => {
 

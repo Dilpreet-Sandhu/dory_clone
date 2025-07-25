@@ -4,7 +4,6 @@ import { cn, propsWithClassName } from "@/lib/utils/uiUtils"
 import { Button, buttonVariants } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import routes from "@/config/routes";
-import Link from "next/link";
 
 type Props = propsWithClassName<{
     ownerId : string;

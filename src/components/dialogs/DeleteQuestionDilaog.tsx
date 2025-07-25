@@ -1,6 +1,6 @@
 "use client"
 
-import { Event, Question } from "@/generated/prisma"
+import {  Question } from "@/generated/prisma"
 import { AlertDialogProps } from "@radix-ui/react-alert-dialog"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../ui/alert-dialog";
 import { buttonVariants } from "../ui/button";

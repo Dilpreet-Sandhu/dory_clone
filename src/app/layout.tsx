@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils/uiUtils";
 import { Toaster } from "@/components/ui/sonner";

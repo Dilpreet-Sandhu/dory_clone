@@ -5,16 +5,13 @@ import { Textarea } from "./ui/textarea";
 
 type Props = propsWithClassName<React.ComponentProps<"textarea">>;
 
-export const TextAreaWithCounter = forwardRef<HTMLTextAreaElement,Props>(
+export const TextAreaWithCounter = forwardRef<HTMLTextAreaElement, Props>(
     ({
-        className,
         defaultValue = "",
         maxLength = 10_000,
         onChange,
-        autoComplete = "off",
-        autoFocus,
         ...props
-    } : Props,forwaredRef) => {
+    }: Props, forwaredRef) => {
 
 
         const [content,setContent] = useState<string>(defaultValue as string);
@@ -34,4 +31,6 @@ export const TextAreaWithCounter = forwardRef<HTMLTextAreaElement,Props>(
             <span className="text-xs font-light ml-2">{content.length} / {maxLength}</span>
         </div>
     }
-)
+);
+
+TextAreaWithCounter.displayName = "TextAreaWithCounter";

@@ -16,7 +16,7 @@ type Props = propsWithClassName<{
 
 const EventAdminMenu = ({event,className} : Props) => {
 
-    const [openUpdateDialog,setOpenUpdateDialog] = useState(false);
+    // const [openUpdateDialog,setOpenUpdateDialog] = useState(false);
     const [openDeleteDialog,setOpenDeleteDialog] = useState(false);
 
     const {user} = useKindeBrowserClient();

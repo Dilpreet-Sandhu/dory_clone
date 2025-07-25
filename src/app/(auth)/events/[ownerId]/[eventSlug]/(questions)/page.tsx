@@ -14,11 +14,6 @@ type PathParams = {
   ownerId : string;
 }
 
-type SearchParams = {
-  sortBy : QuestionOrderBy;
-  questionId : string;
-  resolved : string;
-}
 
 const EventQuestionsPage = async (
   props: {params : Promise<PathParams>,searchParams ?:Promise<{[key: string]: string | string[] | undefined}>}

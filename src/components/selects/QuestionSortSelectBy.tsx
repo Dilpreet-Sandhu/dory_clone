@@ -28,7 +28,11 @@ const QuestionSortSelectBy = ({sortBy} : Props) => {
             .with("oldest",() => "oldest")
             .otherwise(() => undefined);
 
-        orderBy ? newParams.set(quetionsPageQueryParams.sortBy,orderBy) : newParams.delete(quetionsPageQueryParams.sortBy);
+        if (orderBy) {
+            newParams.set(quetionsPageQueryParams.sortBy, orderBy);
+        } else {
+            newParams.delete(quetionsPageQueryParams.sortBy);
+        }
 
         router.replace(`${pathname}?${newParams.toString()}`)
 

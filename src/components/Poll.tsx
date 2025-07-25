@@ -30,7 +30,7 @@ export const LivePoll = ({poll : initialPoll,className} : Props) => {
 
     console.log("voted index",votedOptionIndex);
 
-    const {isLive,options} = poll;
+    const {options} = poll;
 
     const totalVotes = poll._count.votes;
 

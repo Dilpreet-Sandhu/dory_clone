@@ -8,7 +8,7 @@ import ParticipantsToolTip from "@/components/tooltips/ParticipantsToolTip";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UserAvatar from "@/components/UserAvatar";
 import { getEventDetails } from "@/lib/server/getEventDetails";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PropsWithChildren } from "react";

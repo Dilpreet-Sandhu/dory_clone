@@ -18,7 +18,7 @@ const MyBookMarksPage = async () => {
         {
           initialBookMarkedEvents.length === 0 ? (
           <NoContent>
-            You have'nt bookmarked any events yet
+            You have &apos; nt bookmarked any events yet
           </NoContent> ) : <BookMarkedEventsList initialEvents={initialBookMarkedEvents}/>
         }
 

@@ -1,7 +1,6 @@
 import routes, { baseUrl } from "@/config/routes";
 import { Poll, PollOption, User } from "@/generated/prisma";
 import { votePollAction } from "@/lib/actions/vote-poll-action";
-import { voteQuestionAction } from "@/lib/actions/vote-question-action";
 import { PollDetail } from "@/lib/prisma/validators/poll-validator";
 import { supabaseClient } from "@/lib/supabase/client";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
@@ -9,7 +8,7 @@ import { RealtimePostgresChangesPayload } from "@supabase/supabase-js";
 import debounce from "lodash.debounce";
 import { useAction } from "next-safe-action/hooks";
 import { useRouter } from "next/navigation";
-import { use, useCallback, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { match } from "ts-pattern";
 
 type VoteEvent = {
@@ -44,7 +43,7 @@ export const useLivePoll = ({ poll: initialPoll }: { poll: PollDetail }) => {
         { event: "*", schema: "public", table: "PollVote" },
         (payload : RealtimePostgresChangesPayload<VoteEvent>) => {
 
-            const {eventType,new : newVote,old : oldVote} = payload;
+            const {eventType,new : newVote} = payload;
 
           match(eventType)
             .with("INSERT", () => {
@@ -193,7 +192,7 @@ export const useLivePoll = ({ poll: initialPoll }: { poll: PollDetail }) => {
     performVote(newOptionIndex);
   };
 
-  const performVote = useCallback(
+  const performVote =
     debounce(
       (newOptionIndex: number) => {
         executeVote({
@@ -203,9 +202,7 @@ export const useLivePoll = ({ poll: initialPoll }: { poll: PollDetail }) => {
       },
       1000,
       { leading: false, trailing: true }
-    ),
-    [poll.id]
-  );
+    );
 
   return { poll, voteOption, votedOptionIndex };
 };

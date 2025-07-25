@@ -6,7 +6,7 @@ import { propsWithClassName } from "@/lib/utils/uiUtils";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { useState } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { EllipsisVertical, Trash, Trash2 } from "lucide-react";
+import { EllipsisVertical, Trash2 } from "lucide-react";
 import { DeletPollDialog } from "../dialogs/DeletPollDialog";
 
 type Props = propsWithClassName<{

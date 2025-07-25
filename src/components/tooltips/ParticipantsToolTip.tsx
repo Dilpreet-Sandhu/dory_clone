@@ -9,7 +9,7 @@ const ParticipantsToolTip = ({participantsCount,className} : Props) => {
     <TooltipProvider>
         <Tooltip>
 
-            <TooltipTrigger>
+            <TooltipTrigger className={className}>
 
                 <div className="inline-flex gap-x-2 p-2 rounded-lg items-center text-xs cursor-pointer hover:bg-slate-200 lg:text-sm">
                     <Users className="w-5 h-5 lg:w-6 lg:h-6"/>

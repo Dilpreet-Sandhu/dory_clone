@@ -1,4 +1,4 @@
-export type propsWithClassName<T = {}> = T & {className ?: string}
+export type propsWithClassName<T = object> = T & {className ?: string}
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 

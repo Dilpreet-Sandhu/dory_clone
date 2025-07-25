@@ -1,6 +1,5 @@
 import GetStartedButton from "@/components/buttons/GetStartedButton";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Button } from "@/components/ui/button";
 import { MessageCircleMore, Radio } from "lucide-react";
 import Image from "next/image";
 import { Suspense } from "react";

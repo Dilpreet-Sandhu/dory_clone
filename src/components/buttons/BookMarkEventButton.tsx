@@ -4,11 +4,10 @@ import { RegisterLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextj
 import { Button } from "../ui/button"
 import { Bookmark, BookmarkCheck } from "lucide-react"
 import routes, { baseUrl } from "@/config/routes"
-import { useCallback, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import { Tooltip, TooltipContent, TooltipTrigger,TooltipProvider } from "../ui/tooltip"
 import { toast } from "sonner"
 import debounce from "lodash.debounce"
-import { NodeNextRequest } from "next/dist/server/base-http/node"
 import { useIsParticipantView } from "@/hooks/useIsparticipantView"
 
 
@@ -28,7 +27,7 @@ const BookMarkEventButton = ({event} : Props) => {
     
     useEffect(() => {
         setIsBookMarked(event.bookMarkedBy.some((bookMarkUser) => bookMarkUser.id === user?.id));
-    },[]);
+    },[event.bookMarkedBy,user?.id]);
     
     
     const handleBookMarkEvent = () => {
@@ -51,18 +50,13 @@ const BookMarkEventButton = ({event} : Props) => {
         
     }
     
-    const performBookMark = useCallback(
-        debounce(
-            () => {
-                console.log("book marked");
-            },
-            1000,
-            {
-                leading : false,trailing : true
-            }
-        ),
-        [event.id]
-    )
+    const performBookMark = debounce(
+        () => console.log("book marked"),
+        1000,
+        {
+            leading: false, trailing: true
+        }
+    );
     if (isParticipantView) {
         return null;
     }

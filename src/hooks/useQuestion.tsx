@@ -6,7 +6,7 @@ import { QuestionDetail } from "@/lib/prisma/validators/question-validator"
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
 import debounce from "lodash.debounce"
 import { useAction } from "next-safe-action/hooks"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
 
@@ -118,7 +118,7 @@ export const useVote = ({
              isVoted : upvotes.some((upvote) => upvote.authorId === user?.id),
             totalVotes : initialVotes
         }))
-    },[user,upvotes])
+    },[user,upvotes,initialVotes])
 
     const toggleClientVote = () => {
 
@@ -129,9 +129,9 @@ export const useVote = ({
 
     };
 
-    const performVote = useCallback(debounce(() => {
+    const performVote = debounce(() => {
             execute({ questionId });
-        }, 1000),[questionId]);
+        }, 1000);
       
 
 
@@ -159,7 +159,7 @@ export const useUpdateQuestionBody = ({
     const [body,setBody] = useState(initalBody);
 
      const {execute,isExecuting} = useAction(updateQuestionAction,{
-        onSuccess : ({input}) => {
+        onSuccess : () => {
             console.log("question body updated succesfully");
         },
         onError : (err) => {

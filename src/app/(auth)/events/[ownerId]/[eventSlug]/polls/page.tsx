@@ -19,11 +19,7 @@ type PathParams = {
   ownerId : string;
 }
 
-type SearchParams = {
-  closed : string;
-  asParticipant : string;
-  pollId : string;
-}
+
 
 const PollsPage = async (
   props: {

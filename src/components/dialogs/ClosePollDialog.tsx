@@ -16,12 +16,16 @@ export const ClosePollDialog = ({
 } : Props) => {
 
     const isFieldDisabled = false;
-    const isExecuting = false;
+    const isExecuting = isFieldDisabled;
+
+
 
     const handleClose = (event : React.MouseEvent) => {
         event.preventDefault();
 
         //todo add server action
+        console.log(pollId);
+        onSuccess?.();
     }
 
 
@@ -34,7 +38,7 @@ export const ClosePollDialog = ({
                 </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-                <AlertDialogCancel disabled={isFieldDisabled} className={cn(buttonVariants({variant : "ghost"}))}>
+                <AlertDialogCancel disabled={isExecuting} className={cn(buttonVariants({variant : "ghost"}))}>
                     Cancel
                 </AlertDialogCancel>
                 <AlertDialogAction onClick={handleClose} disabled={isFieldDisabled} className={cn(buttonVariants({variant : "destructive"}))}>
