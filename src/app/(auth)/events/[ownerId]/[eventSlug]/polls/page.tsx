@@ -25,10 +25,14 @@ type SearchParams = {
   pollId : string;
 }
 
-const PollsPage = async ({params,searchParams} : {
-  params : PathParams;
-  searchParams ?: {[key: string]: string | string[] | undefined}
-}) => {
+const PollsPage = async (
+  props: {
+    params : Promise<PathParams>;
+    searchParams ?: Promise<{[key: string]: string | string[] | undefined}>
+  }
+) => {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
 
   const {ownerId,eventSlug} =  params;
 
