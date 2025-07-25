@@ -21,10 +21,10 @@ type SearchParams = {
 }
 
 const EventQuestionsPage = async (
-  props: {params : PathParams,searchParams ?:{[key: string]: string | string[] | undefined}}
+  props: {params : Promise<PathParams>,searchParams ?:Promise<{[key: string]: string | string[] | undefined}>}
 ) => {
-  const searchParams =  props.searchParams;
-  const params =  props.params;
+  const searchParams =  await props.searchParams;
+  const params =  await props.params;
 
   const {ownerId,eventSlug} =  params;
   const sortBy = ( searchParams)?.sortBy ?? "newest";
